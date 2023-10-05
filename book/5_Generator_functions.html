@@ -305,6 +305,8 @@ function* generator_function() {
 const generator_obj = generator_function();
 </code></pre>
 <ul>
+<li>Generators were introduced in ES6.</li>
+<li>Generators are memory efficient.</li>
 <li>When you call a generator function, it returns a &quot;Generator object&quot; only with a 'suspended' state. (Can check by console logging on devtools console)</li>
 <li>It represents the current state of the generator function's execution. </li>
 <li>You can use the <code>next()</code> method of the generator object to advance the function's execution and retrieve the next yielded value.</li>
@@ -314,7 +316,18 @@ const generator_obj = generator_function();
 </ul>
 </li>
 </ul>
-
+<h1 id="generator-methods-"><a class="header" href="#generator-methods-">Generator Methods :</a></h1>
+<ol>
+<li><code>next()</code> - Returns a value of yield</li>
+<li><code>return()</code> - Returns a value and terminates the generator</li>
+<li><code>throw()</code> - Throws an error and terminates the generator</li>
+</ol>
+<h2 id="javascript-return-vs-yield-keyword-"><a class="header" href="#javascript-return-vs-yield-keyword-">JavaScript return Vs yield Keyword :</a></h2>
+<div class="table-wrapper"><table><thead><tr><th><code>return</code> Keyword</th><th><code>yield</code> Keyword</th></tr></thead><tbody>
+<tr><td>Returns the value and terminates the function.</td><td>Returns the value and halts the function but does not terminate the function.</td></tr>
+<tr><td>Available in both the normal functions and generator functions.</td><td>Available only in generator functions.</td></tr>
+</tbody></table>
+</div>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
