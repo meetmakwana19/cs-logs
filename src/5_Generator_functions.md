@@ -137,9 +137,25 @@ function* generator_function() {
 const generator_obj = generator_function();
 ```
 
+- Generators were introduced in ES6.
+- Generators are memory efficient.
 - When you call a generator function, it returns a "Generator object" only with a 'suspended' state. (Can check by console logging on devtools console)
 -  It represents the current state of the generator function's execution. 
 -  You can use the `next()` method of the generator object to advance the function's execution and retrieve the next yielded value.
 -  By using generator functions, you can write your code in a step-by-step manner, which makes it clear what happens at each step. 
    -  This makes your code more "declarative," meaning you explicitly state what should happen in response to certain actions or events, making it easier for you and others to understand and reason about the code.
+
+# Generator Methods : 
+
+1. `next()` - Returns a value of yield
+2. `return()` - Returns a value and terminates the generator
+3. `throw()` - Throws an error and terminates the generator
+
+## JavaScript return Vs yield Keyword : 
+
+| `return` Keyword                                                | `yield` Keyword                                                                |
+|-----------------------------------------------------------------|--------------------------------------------------------------------------------|
+| Returns the value and terminates the function.                  | Returns the value and halts the function but does not terminate the function.  |
+| Available in both the normal functions and generator functions. | Available only in generator functions.                                         |
+
 
