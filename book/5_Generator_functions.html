@@ -1,0 +1,378 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Generator Functions - CS Logs</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="1_Typescript.html"><strong aria-hidden="true">1.</strong> Typescript</a></li><li class="chapter-item expanded "><a href="2_Monorepo.html"><strong aria-hidden="true">2.</strong> Monorepo</a></li><li class="chapter-item expanded "><a href="3_redux.html"><strong aria-hidden="true">3.</strong> Redux</a></li><li class="chapter-item expanded "><a href="4_Redux-saga.html"><strong aria-hidden="true">4.</strong> Redux-Saga</a></li><li class="chapter-item expanded "><a href="5_Generator_functions.html" class="active"><strong aria-hidden="true">5.</strong> Generator Functions</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">CS Logs</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="5-generator-functions-in-js"><a class="header" href="#5-generator-functions-in-js">5. Generator Functions in JS</a></h1>
+<ul>
+<li>Redux Saga relies heavily on generator functions.</li>
+<li>These are special functions in JavaScript marked by an asterisk (*) that allow you to pause and resume their execution.
+<ul>
+<li>You can either use <code>function* generatorFunc() {...}</code> or <code>function *generatorFunc(){...}</code> to create them.</li>
+</ul>
+</li>
+<li>They are used to represent asynchronous flows in a synchronous-looking manner.</li>
+<li>Using <code>yeild</code> keyword, we can pause the execution of a generator function without executing the whole function body.</li>
+<li>The <code>yield</code> expression returns a value.
+<ul>
+<li>However, unlike the return statement, it doesn't terminate the program.</li>
+<li>That's why you can continue executing code from the last yielded position.</li>
+</ul>
+</li>
+<li>So <strong><code>yeild</code></strong> means &quot;I want to emit this value, but I'll pause execution here until someone requests the next value.&quot;</li>
+</ul>
+<pre><code class="language-js">function* generatorFunc() {
+  console.log(&quot;1. code before first yield&quot;);
+  yield 100;
+
+  console.log(&quot;2. code before the second yield&quot;);
+  yield 200;
+
+  console.log(&quot;3. code after the second yield&quot;);
+}
+
+const generator = generatorFunc();
+
+console.log(generator.next());
+console.log(generator.next());
+console.log(generator.next());
+</code></pre>
+<pre><code class="language-bash">1. code before first yield
+{ value: 100, done: false }
+1. code before the second yield
+{ value: 200, done: false }
+1. code after the second yield
+{ value: undefined, done: true }
+</code></pre>
+<p>Another example :</p>
+<pre><code class="language-js">function* myGenerator() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const generator = myGenerator();
+console.log(generator.next()); // { value: 1, done: false }
+console.log(generator.next()); // { value: 2, done: false }
+console.log(generator.next()); // { value: 3, done: false }
+console.log(generator.next()); // { value: undefined, done: true }
+</code></pre>
+<ul>
+<li>The first <code>generator.next()</code> statement executes the code up to the first yield statement and pauses the execution of the program.</li>
+<li>The second <code>generator.next()</code> starts the program from the paused position.</li>
+<li>When all the elements are accessed, it returns <code>{value: undefined, done: true}</code>.
+<ul>
+<li>So the <code>next()</code> method returns an object with two properties: <code>value</code> (the yielded value) and <code>done</code> (a boolean indicating if the generator has finished).</li>
+<li>To advance the generator function's execution, you call the <code>next()</code> method on the generator object. </li>
+<li>This method resumes the generator function from where it was paused by the last yield statement and runs until the next yield or until the function exits.</li>
+</ul>
+</li>
+<li>The <code>next()</code> method returns an object with a <code>value</code> property. This <code>value</code> property holds the value that was emitted by the most recent <code>yield</code> statement. It's essentially the value produced by the generator function during that step of execution.</li>
+</ul>
+<blockquote>
+<p>Also, Generator functions and Generators in JavaScript are a way to create iterators, which allow you to efficiently iterate over a potentially large sequence of values one at a time.</p>
+</blockquote>
+<blockquote>
+<p>They are used for tasks like iterating through arrays, processing streams of data, or generating sequences dynamically.</p>
+</blockquote>
+<p>Using a Generator to Generate an Infinite Sequence:</p>
+<ul>
+<li>Generators can be used to create infinite sequences or handle large data sets efficiently without loading everything into memory.</li>
+</ul>
+<pre><code class="language-js">function* infiniteSequence() {
+  let i = 0;
+  while (true) {
+    yield i++;
+  }
+}
+
+const generator = infiniteSequence();
+console.log(generator.next().value); // 0
+console.log(generator.next().value); // 1
+console.log(generator.next().value); // 2
+// ...
+</code></pre>
+<p>Another example for Passing Arguments to Generator Functions : </p>
+<pre><code class="language-js">// generator function
+function* generatorFunc() {
+
+    // returns 'hello' at first next()
+    let x = yield 'hello';
+    
+    // returns passed argument on the second next()
+    console.log(x);
+    console.log('some code');
+
+    // returns 5 on second next()
+    yield 5;
+    
+}
+
+const generator = generatorFunc();
+
+console.log(generator.next());
+console.log(generator.next(6));
+console.log(generator.next());
+</code></pre>
+<pre><code class="language-bash">{ value: 'hello', done: false }
+6
+some code
+{ value: 5, done: false }
+{ value: undefined, done: true }
+</code></pre>
+<h2 id="generators"><a class="header" href="#generators">Generators:</a></h2>
+<p>Using a generator,</p>
+<ul>
+<li>you can stop the execution of a function from anywhere inside the function</li>
+<li>and continue executing code from a halted position</li>
+<li>To create a generator, you need to first define a generator function with <code>function*</code> symbol.</li>
+<li>The objects of generator functions are called <strong>generators</strong>.</li>
+</ul>
+<pre><code class="language-js">// define a generator function
+function* generator_function() {
+   ... .. ...
+}
+
+// creating a generator
+const generator_obj = generator_function();
+</code></pre>
+<ul>
+<li>When you call a generator function, it returns a &quot;Generator object&quot; only with a 'suspended' state. (Can check by console logging on devtools console)</li>
+<li>It represents the current state of the generator function's execution. </li>
+<li>You can use the <code>next()</code> method of the generator object to advance the function's execution and retrieve the next yielded value.</li>
+<li>By using generator functions, you can write your code in a step-by-step manner, which makes it clear what happens at each step. 
+<ul>
+<li>This makes your code more &quot;declarative,&quot; meaning you explicitly state what should happen in response to certain actions or events, making it easier for you and others to understand and reason about the code.</li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="4_Redux-saga.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="4_Redux-saga.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,6 @@
+[book]
+authors = ["Meet Makwana"]
+language = "en"
+multilingual = false
+src = "src"
+title = "CS Logs"
