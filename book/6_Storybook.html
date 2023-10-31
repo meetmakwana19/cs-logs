@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Typescript - CS Logs</title>
+        <title>StorybookJS - CS Logs</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="1_Typescript.html" class="active"><strong aria-hidden="true">1.</strong> Typescript</a></li><li class="chapter-item expanded "><a href="2_Monorepo.html"><strong aria-hidden="true">2.</strong> Monorepo</a></li><li class="chapter-item expanded "><a href="3_redux.html"><strong aria-hidden="true">3.</strong> Redux</a></li><li class="chapter-item expanded "><a href="4_Redux-saga.html"><strong aria-hidden="true">4.</strong> Redux-Saga</a></li><li class="chapter-item expanded "><a href="5_Generator_functions.html"><strong aria-hidden="true">5.</strong> Generator Functions</a></li><li class="chapter-item expanded "><a href="6_Storybook.html"><strong aria-hidden="true">6.</strong> StorybookJS</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="1_Typescript.html"><strong aria-hidden="true">1.</strong> Typescript</a></li><li class="chapter-item expanded "><a href="2_Monorepo.html"><strong aria-hidden="true">2.</strong> Monorepo</a></li><li class="chapter-item expanded "><a href="3_redux.html"><strong aria-hidden="true">3.</strong> Redux</a></li><li class="chapter-item expanded "><a href="4_Redux-saga.html"><strong aria-hidden="true">4.</strong> Redux-Saga</a></li><li class="chapter-item expanded "><a href="5_Generator_functions.html"><strong aria-hidden="true">5.</strong> Generator Functions</a></li><li class="chapter-item expanded "><a href="6_Storybook.html" class="active"><strong aria-hidden="true">6.</strong> StorybookJS</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -171,103 +171,43 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="1-typescript"><a class="header" href="#1-typescript">1. Typescript</a></h1>
+                        <h1 id="storybook-"><a class="header" href="#storybook-">Storybook :</a></h1>
+<ul>
+<li>An interactive <strong>directory</strong> of your UI components and their stories.</li>
+<li>Storybook is packaged as a small, development-only, workshop that lives alongside your app.</li>
+<li>It helps you focus development on each variation of a component, even the hard-to-reach edge cases.</li>
+<li>Jump straight to working on a UI component in a specific state.</li>
+<li>Build and test individual components outside of the main development environment of the project.</li>
+<li>Can quickly create real product scenarios without having to build that functionality out for real.
+<ul>
+<li><em>Like What does the dashboard look like if the user is brand new vs a veteran user? What does the logged in header look like vs logged out header?</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="stories-"><a class="header" href="#stories-">Stories ?</a></h2>
 <blockquote>
-<p><em>Install typescript when you've nodejs already installed.</em></p>
+<p>Capture UI variations as “stories”</p>
 </blockquote>
-<pre><code class="language-bash">npm install -g typescript
-</code></pre>
 <ul>
-<li>Then if you use the command <code>tsc</code>, it'll generate a JavaScript file in the same directory. You can then run this JavaScript file using Node.js</li>
+<li>When developing a component variation in isolation, save it as a story. </li>
+<li>'Stories are a declarative syntax for <em>supplying props and mock data</em> to simulate component variations. </li>
+<li>Each component can have <em>multiple stories</em>. </li>
+<li>Each story allows you to demonstrate a <em>specific variation</em> of that component to verify appearance and behavior.</li>
+<li>You write stories for granular UI component variation and then use those stories in development, testing, and documentation.</li>
+<li>Storybook is the single source of truth for your UI. </li>
+<li>Stories index all your components and their various states, making it easy for your team to find and reuse existing UI patterns. </li>
+<li>Storybook also auto-generates <em>documentation</em> from those stories.</li>
+<li>Each story is exported as a JavaScript function enabling you to reuse it with other tools. </li>
 </ul>
-<pre><code class="language-bash">tsc filename.ts
-
-node filename.js
-</code></pre>
-<ul>
-<li>To compile and run your TypeScript code in one step, you can use the <code>ts-node</code> package</li>
-</ul>
-<pre><code class="language-bash">ts-node filename.ts
-</code></pre>
-<p>-Typescript code dont work anywhere alone, it wont work in the browser nor in the nodejs environment. Thats why we need to transpile it first to javascript using a Typescript compiler(eg: tsc, babel)</p>
-<hr />
-<ol>
-<li>A typescript project will likely have a <code>tsconfig.json</code> file which provides an infinite number of ways to customize the behviour of the TS compiler.</li>
-<li>Primary Goal : Static Typing ()
-<ol>
-<li>Can do that my annotating the code with &quot;types&quot;</li>
-<li>So we can strongly type a variable by using a colon <code>:</code> followed by it's type(data-type) which is known as an <strong>Explicit Type</strong>.</li>
-</ol>
-<pre><code class="language-ts">let name1: string;
-let list1: number[] = [1, 2, 3];
-</code></pre>
-<ol start="3">
-<li>We can opt out of this static typing by using the keyword <code>any</code>. If we dont assign a type then it will be bydefault <code>any</code> type for typescript</li>
-</ol>
-<pre><code class="language-ts">let name1: any;
-</code></pre>
-</li>
-<li>By default, <code>tsc</code> compiler compiles ts code into es3 which doesnt have support for async-await.
-<ol>
-<li>So better to make a <code>tsconfig.json</code> file which will configure the compiler based on this data.
-<ol>
-<li>Put <code>&quot;target&quot;: &quot;esnext&quot;</code> and run command <code>tsc</code> only. &quot;target&quot; instructs to compile js in the flavour of js like es5, es6, esnext(latest one), etc etc.</li>
-</ol>
-<pre><code class="language-bash">tsc
-</code></pre>
-<ol start="2">
-<li><code>&quot;watch&quot;: true</code> will recompile the code everytime we save the ts file. It'll save us from typing tsc command after every change.</li>
-<li><code>&quot;lib&quot;</code> allows us to get intellisense on those libraries which we are using in the typescript project. So it gets us environment for those libraries.</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>While installing some 3rd party libraries, sometimes it can be warning-full as typescript wont detect the type declarations directly. So we install mono repos which are community maintained. Like for in the case of lodash : </li>
-</ol>
-<pre><code class="language-bash">npm i -D @types/lodash
-</code></pre>
-<h3 id="create-custom-type-"><a class="header" href="#create-custom-type-">Create custom type :</a></h3>
-<ol>
-<li>Define using <code>type</code> keyword and name the type with pascalcase.</li>
-<li>Can allow the custom type to have multiple data types using <code>|</code>.</li>
-</ol>
-<pre><code class="language-ts">type CustomStyle = string | &quot;bold&quot; | &quot;italic&quot; | 20;
-</code></pre>
-<h3 id="strong-type-an-object-using-interface"><a class="header" href="#strong-type-an-object-using-interface">Strong type an object using <code>interface</code></a></h3>
-<ol>
-<li>Can define the type of properties inside an object using interfaces.</li>
-<li>It acts like a class to an object which can be interpreted as a template.</li>
-</ol>
-<pre><code class="language-ts">interface Person {
-  first: string;
-  last: string;
-  [key: string]: any; // for any additionally property with string type key and any type data type
-}
-</code></pre>
-<h3 id="strong-typing-a-function"><a class="header" href="#strong-typing-a-function">Strong typing a function</a></h3>
-<ol>
-<li>It can be little more complex as it can require to strong type the arguments as well as return values.</li>
-<li>Function return value can be given a type after the paranthesis in the function definition like <code>func(): Type</code>.
-<ol>
-<li>But if there is a function doing any side effects or not returning anything then can give a <code>void</code> type over there like <code>func(): void</code>.</li>
-</ol>
-</li>
-</ol>
-<pre><code class="language-ts">function pow(x: number, y: number): string {
-  // function pow(x: number, y: number): void {
-  return Math.pow(x, y).toString();
-}
-</code></pre>
-<hr />
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-
-                            <a rel="next prefetch" href="2_Monorepo.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="5_Generator_functions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
+
 
                         <div style="clear: both"></div>
                     </nav>
@@ -275,10 +215,10 @@ let list1: number[] = [1, 2, 3];
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-
-                    <a rel="next prefetch" href="2_Monorepo.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="5_Generator_functions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
+
             </nav>
 
         </div>

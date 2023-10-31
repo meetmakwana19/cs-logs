@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="1_Typescript.html"><strong aria-hidden="true">1.</strong> Typescript</a></li><li class="chapter-item expanded "><a href="2_Monorepo.html"><strong aria-hidden="true">2.</strong> Monorepo</a></li><li class="chapter-item expanded "><a href="3_redux.html"><strong aria-hidden="true">3.</strong> Redux</a></li><li class="chapter-item expanded "><a href="4_Redux-saga.html"><strong aria-hidden="true">4.</strong> Redux-Saga</a></li><li class="chapter-item expanded "><a href="5_Generator_functions.html"><strong aria-hidden="true">5.</strong> Generator Functions</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="1_Typescript.html"><strong aria-hidden="true">1.</strong> Typescript</a></li><li class="chapter-item expanded "><a href="2_Monorepo.html"><strong aria-hidden="true">2.</strong> Monorepo</a></li><li class="chapter-item expanded "><a href="3_redux.html"><strong aria-hidden="true">3.</strong> Redux</a></li><li class="chapter-item expanded "><a href="4_Redux-saga.html"><strong aria-hidden="true">4.</strong> Redux-Saga</a></li><li class="chapter-item expanded "><a href="5_Generator_functions.html"><strong aria-hidden="true">5.</strong> Generator Functions</a></li><li class="chapter-item expanded "><a href="6_Storybook.html"><strong aria-hidden="true">6.</strong> StorybookJS</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -567,7 +567,35 @@ const generator_obj = generator_function();
 <tr><td>Returns the value and terminates the function.</td><td>Returns the value and halts the function but does not terminate the function.</td></tr>
 <tr><td>Available in both the normal functions and generator functions.</td><td>Available only in generator functions.</td></tr>
 </tbody></table>
-</div>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="storybook-"><a class="header" href="#storybook-">Storybook :</a></h1>
+<ul>
+<li>An interactive <strong>directory</strong> of your UI components and their stories.</li>
+<li>Storybook is packaged as a small, development-only, workshop that lives alongside your app.</li>
+<li>It helps you focus development on each variation of a component, even the hard-to-reach edge cases.</li>
+<li>Jump straight to working on a UI component in a specific state.</li>
+<li>Build and test individual components outside of the main development environment of the project.</li>
+<li>Can quickly create real product scenarios without having to build that functionality out for real.
+<ul>
+<li><em>Like What does the dashboard look like if the user is brand new vs a veteran user? What does the logged in header look like vs logged out header?</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="stories-"><a class="header" href="#stories-">Stories ?</a></h2>
+<blockquote>
+<p>Capture UI variations as “stories”</p>
+</blockquote>
+<ul>
+<li>When developing a component variation in isolation, save it as a story. </li>
+<li>'Stories are a declarative syntax for <em>supplying props and mock data</em> to simulate component variations. </li>
+<li>Each component can have <em>multiple stories</em>. </li>
+<li>Each story allows you to demonstrate a <em>specific variation</em> of that component to verify appearance and behavior.</li>
+<li>You write stories for granular UI component variation and then use those stories in development, testing, and documentation.</li>
+<li>Storybook is the single source of truth for your UI. </li>
+<li>Stories index all your components and their various states, making it easy for your team to find and reuse existing UI patterns. </li>
+<li>Storybook also auto-generates <em>documentation</em> from those stories.</li>
+<li>Each story is exported as a JavaScript function enabling you to reuse it with other tools. </li>
+</ul>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
